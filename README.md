@@ -28,13 +28,14 @@ It's definitely still a work in progress, so [make an issue](https://github.com/
 
 ## Text Input and Editing
 
-| Shortcut (Mac/Windows) |         Action        |
-|:----------------------:|:---------------------:|
-|      Shift + Esc       |    Focus chat input   |
-|   ⌘/Ctrl + Shift + E   |       Edit text       |
-|   ⌘/Ctrl + Shift + ;   |  Copy last code block |
-|   ⌘/Ctrl + Shift + C   |   Copy last response  |
-|   ⌘/Ctrl + Shift + K   | Stop/start generation |
+| Shortcut (Mac/Windows) |             Action            |
+|:----------------------:|:-----------------------------:|
+|  ⌘/Ctrl + Shift + Esc  |        Focus chat input       |
+|   ⌘/Ctrl + Shift + E   |           Edit text           |
+|   ⌘/Ctrl + Shift + ;   |      Copy last code block     |
+|   ⌘/Ctrl + Shift + '   |Copy second-to-last code block |
+|   ⌘/Ctrl + Shift + C   |         Copy response         |
+|   ⌘/Ctrl + Shift + K   |     Stop/start generation     |
 
 
 ## Draft Navigation
