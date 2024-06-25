@@ -8,6 +8,8 @@ This also script maximizes the space of the chatbox, and maximizes efficiency by
 
 GeminiPilot was born out of my OCD one day, when I finally got fed up enough with clicking around to do things in Gemini. 9 straight hours later, this project was born. You're welcome.
 
+It's definitely still a work in progress, so give it a pull request if you see something wrong or have a feature request.
+
 
 # Included Keyboard Shortcuts:
 
