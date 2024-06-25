@@ -10,7 +10,7 @@ GeminiPilot was born out of my OCD one day, when I finally got fed up enough wit
 
 It's definitely still a work in progress, so [make an issue](https://github.com/HenryGetz/GeminiPilot/issues/new/choose) if you see something, or [join the discussion](https://github.com/HenryGetz/GeminiPilot/discussions) if you have a feature you want to see implemented.
 
-Feel free to install it [directly](https://raw.githubusercontent.com/HenryGetz/GeminiPilot/main/gemini-keyboard-shortcuts.js) or through [Greasy Fork](https://greasyfork.org/en/scripts/498823-gemini-keyboard-shortcuts). I hope this is as helpful for you as it has been for me :)
+Feel free to install it [directly](https://www.tampermonkey.net/script_installation.php#url=https://github.com/HenryGetz/GeminiPilot/raw/main/gemini-keyboard-shortcuts.js) or through [Greasy Fork](https://greasyfork.org/en/scripts/498823-gemini-keyboard-shortcuts). I hope this is as helpful for you as it has been for me :)
 
 
 # Included Keyboard Shortcuts:
