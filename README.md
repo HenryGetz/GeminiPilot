@@ -21,7 +21,7 @@ It's definitely still a work in progress, so give it a pull request if you see s
 | ⌘/Ctrl + Shift + O         | Open new chat  |
 | ⌘/Ctrl + Shift + Backspace | Delete chat    |
 | ⌘/Ctrl + Shift + F         | Toggle sidebar |
-| ⌥/Alt + 1-9                | Go to nth chat |
+| ⌥/Alt + 0-9                | Go to nth chat |
 | ⌘/Ctrl + Shift + =         | Next chat      |
 | ⌘/Ctrl + Shift + –         | Previous chat  |
 
