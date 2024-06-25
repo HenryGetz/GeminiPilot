@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Gemini Keyboard Shortcuts
 // @namespace   http://tampermonkey.net/
-// @version     1.01
+// @version     1.02
 // @description This userscript enhances your Gemini experience by adding a wide range of keyboard shortcuts for streamlined navigation and interaction, as well as cleaning up Gemini's UI.
 // @license     MIT
 // @author      Henry Getz
