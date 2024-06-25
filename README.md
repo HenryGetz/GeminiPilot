@@ -1,7 +1,9 @@
 # GeminiPilot
 Take control of your Gemini experience with this Tampermonkey script! Streamline your workflow and unlock enhanced productivity with a powerful set of keyboard shortcuts and UI optimizations. 
 
-This also script maximizes the space of the chatbox, and maximizes efficiency by automatically focusing the input. You're welcome.
+This also script maximizes the space of the chatbox, and maximizes efficiency by automatically focusing the input.
+
+GeminiPilot was born out of my OCD one day, when I finally got fed up enough with clicking around to do things in Gemini. 9 straight hours later, this project was born. You're welcome.
 
 
 # Included Keyboard Shortcuts:
