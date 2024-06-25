@@ -3,6 +3,9 @@ Take control of your Gemini experience with this Tampermonkey script! Streamline
 
 This also script maximizes the space of the chatbox, and maximizes efficiency by automatically focusing the input.
 
+![image](https://github.com/HenryGetz/GeminiPilot/assets/109257119/10e8faed-6c26-4255-aaf8-cd5fe53b5738)
+
+
 GeminiPilot was born out of my OCD one day, when I finally got fed up enough with clicking around to do things in Gemini. 9 straight hours later, this project was born. You're welcome.
 
 
