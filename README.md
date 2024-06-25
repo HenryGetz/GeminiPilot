@@ -1,10 +1,11 @@
 # GeminiPilot
 Turbocharge your Gemini experience with this Tampermonkey script! Streamline your workflow and unlock enhanced productivity with a powerful set of keyboard shortcuts and UI optimizations.
 
-#Included Keyboard Shortcuts:
+
+# Included Keyboard Shortcuts:
 
 
-##Chat Management
+## Chat Management
 
 |   Shortcut (Mac/Windows)   |     Action     |
 |:--------------------------:|:--------------:|
@@ -16,7 +17,7 @@ Turbocharge your Gemini experience with this Tampermonkey script! Streamline you
 | ⌘/Ctrl + Shift + –         | Previous chat  |
 
 
-##Text Input and Editing
+## Text Input and Editing
 
 | Shortcut (Mac/Windows) |         Action        |
 |:----------------------:|:---------------------:|
@@ -27,7 +28,7 @@ Turbocharge your Gemini experience with this Tampermonkey script! Streamline you
 |   ⌘/Ctrl + Shift + K   | Stop/start generation |
 
 
-##Draft Navigation
+## Draft Navigation
 
 | Shortcut (Mac/Windows) |        Action        |
 |:----------------------:|:--------------------:|
@@ -36,7 +37,7 @@ Turbocharge your Gemini experience with this Tampermonkey script! Streamline you
 |   ⌘/Ctrl + Shift + .   |    Previous draft    |
 
 
-##Sharing and Linking
+## Sharing and Linking
 
 | Shortcut (Mac/Windows) |           Action          |
 |:----------------------:|:-------------------------:|
@@ -44,7 +45,7 @@ Turbocharge your Gemini experience with this Tampermonkey script! Streamline you
 |   ⌘/Ctrl + Shift + M   |       Copy chat link      |
 
 
-##Audio and File Shortcuts
+## Audio and File Shortcuts
 
 | Shortcut (Mac/Windows) |         Action        |
 |:----------------------:|:---------------------:|
