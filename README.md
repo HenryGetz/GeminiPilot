@@ -30,7 +30,7 @@ It's definitely still a work in progress, so give it a pull request if you see s
 
 | Shortcut (Mac/Windows) |         Action        |
 |:----------------------:|:---------------------:|
-|  ⌘/Ctrl + Shift + Esc  |    Focus chat input   |
+|      Shift + Esc       |    Focus chat input   |
 |   ⌘/Ctrl + Shift + E   |       Edit text       |
 |   ⌘/Ctrl + Shift + ;   |  Copy last code block |
 |   ⌘/Ctrl + Shift + C   |   Copy last response  |
