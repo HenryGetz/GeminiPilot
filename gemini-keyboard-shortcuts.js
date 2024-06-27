@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Gemini Keyboard Shortcuts
 // @namespace   http://tampermonkey.net/
-// @version     1.1
+// @version     1.2
 // @description This userscript enhances your Gemini experience by adding a wide range of keyboard shortcuts for streamlined navigation and interaction, as well as cleaning up Gemini's UI.
 // @license     MIT
 // @author      Henry Getz
@@ -14,6 +14,11 @@
 // @updateURL https://update.greasyfork.org/scripts/498823/Gemini%20Keyboard%20Shortcuts.meta.js
 // ==/UserScript==
 /*
+
+#New Feature: URL Parameters!
+
+Empower your automation workflows!  Directly open Gemini with pre-populated prompts by using query parameters in the URL (e.g., `https://gemini.google.com/app?q=YOURTESTPROMPT`).
+
 
 # Included Keyboard Shortcuts:
 
@@ -34,7 +39,7 @@
 
 | Shortcut (Mac/Windows) |             Action            |
 |:----------------------:|:-----------------------------:|
-|  ⌘/Ctrl + Shift + Esc  |        Focus chat input       |
+|      Shift + Esc       |        Focus chat input       |
 |   ⌘/Ctrl + Shift + E   |           Edit text           |
 |   ⌘/Ctrl + Shift + ;   |      Copy last code block     |
 |   ⌘/Ctrl + Shift + '   |Copy second-to-last code block |
@@ -72,10 +77,10 @@
 
 */
 
-//This code makes the prompt take up the full width of the screen.
-
 (function() {
     'use strict';
+
+    //This code makes the prompt take up the full width of the screen, and moves the heading
 
     let s = document.createElement("style");
     document.head.append(s);
@@ -118,34 +123,89 @@ bard-mode-switcher {
     border: none !important;
 }
 
+* > .conversation-container:first-child {
+    border-top: solid transparent 60px !important;
+}
+
 `;
-
-//This code makes sure that the 'more chats' feature is selected without user interaction (so that you can select chats 6-9 with alt as well.)
-    const observer = new MutationObserver((_, observer) => {
-        const element = document.querySelector('[data-test-id="show-more-button"]');
-        if (element) {
-            observer.disconnect();
-            simulateClick(element);
-        }
-    });
-    observer.observe(document.body, {childList: true, subtree: true});
-
-    
-//With this false, it will copy from the response in the viewport.
+    //With this false, it will copy from the response in the viewport.
 
     const assumeLastResponse = false;
 
-//This setting allows you to delete chats in succession, like browser tabs, instead of beign forced to go to a new one.
+    //This setting allows you to delete chats in succession, like browser tabs, instead of beign forced to go to a new one.
 
     const goToNextChatOnDelete = false;
 
-
-    window.onload = () => setTimeout(() => document.querySelector('.text-input-field').click(), 500);
     const nums = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
     const rapidClickDelayMS = 100;
     const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1);
 
 
+    //This code makes sure that the 'more chats' feature is selected without user interaction (so that you can select chats 6-9 with alt as well.)
+
+    //This code also allows for query parameters in the URL.
+
+    let showMoreClicked = false;
+    let inputBarClicked = false;
+    const observer = new MutationObserver((_, observer) => {
+        const showMore = document.querySelector('[data-test-id="show-more-button"]');
+        const inputBar = document.querySelector('.text-input-field');
+        const textInput = document.querySelector('[aria-label="Enter a prompt here"] p');
+
+        if (showMore && !showMoreClicked) {
+            showMoreClicked = true;
+            simulateClick(showMore);
+        }
+        if (window.location.href.includes("?q=") && inputBar && !inputBarClicked) {
+            if (textInput && !inputBarClicked) {
+
+
+                inputBarClicked = true;
+                let url = new URL(window.location.href);
+                let params = new URLSearchParams(url.search);
+                let query = params.get('q');
+                params.delete('q');
+                window.history.pushState(null,"",url.origin + url.pathname);
+
+                setTimeout(function(){
+                    inputBar.click();
+
+                    setTimeout(function(){
+                        textInput.innerText = query;
+
+                        //This waits to also change the url when the drafts generate. Google is weird and changes it back
+                        const observer = new MutationObserver((_, observer) => {
+                            let showDrafts = document.querySelector('[data-test-id="generate-more-drafts-button"]');
+                            if (showDrafts) {
+                                observer.disconnect();
+
+                                setTimeout(function(){
+                                    console.log('hehe')
+                                    url = new URL(window.location.href);
+                                    params = new URLSearchParams(url.search);
+                                    window.history.pushState(null,"",url.origin + url.pathname);
+                                }, 2000)
+                            }
+                        });
+                        observer.observe(document.body, {childList: true, subtree: true});
+
+                        setTimeout(function(){
+                            document.querySelector('[aria-label="Send message"]').click();
+                        }, rapidClickDelayMS)
+                    } ,rapidClickDelayMS)
+                }, rapidClickDelayMS)
+
+            }
+        } else if (inputBar && !inputBarClicked) {
+            inputBarClicked = true;
+            setTimeout(() => inputBar.click(), rapidClickDelayMS)
+        }
+
+        if (showMoreClicked && inputBarClicked) {
+            observer.disconnect();
+        }
+    });
+    observer.observe(document.body, {childList: true, subtree: true});
 
     let c = null;
     function getLastElement(querySelector) {
@@ -199,11 +259,6 @@ bard-mode-switcher {
 
         try {
             const successful = document.execCommand('copy');
-            if (successful) {
-                console.log('Rich text copied!');
-            } else {
-                console.error('Failed to copy rich text: execCommand failed');
-            }
         } catch (err) {
             console.error('Failed to copy rich text: ', err);
         }
