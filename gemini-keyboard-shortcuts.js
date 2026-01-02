@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gemini Keyboard Shortcuts (Power Tweaks)
 // @namespace    http://tampermonkey.net/
-// @version      1.3.1
+// @version      1.3.2
 // @description  Power-user hotkeys for Gemini with Win11 fixes, URL param prefill, and a centralized config for selectors & shortcuts. New Chat = ⌘/Ctrl+Shift+O, Sidebar Toggle = ⌘/Ctrl+B.
 // @license      MIT
 // @author       Henry Getz
@@ -20,6 +20,7 @@
 - **Reliable New Chat selector**: Uses `button[aria-label*='New chat']`.
 - **Shortcut updates**:
   - New Chat: **⌘/Ctrl + Shift + O**
+  - Rename Chat: **⌘/Ctrl + Shift + U**
   - Sidebar Toggle: **⌘/Ctrl + B** (like VS Code)
   - Help Window: **⌘/Ctrl + Shift + ?**
 - **Windows 11 key handling**: Normalizes `event.key` to lowercase so Shift no longer breaks letter detection.
@@ -33,6 +34,7 @@
 | Shortcut (Mac/Windows)      | Action            |
 |:---------------------------:|:------------------|
 | ⌘/Ctrl + **Shift + O**      | Open new chat     |
+| ⌘/Ctrl + **Shift + U**      | Rename chat       |
 | ⌘/Ctrl + Shift + Backspace  | Delete chat       |
 | ⌘/Ctrl + **B**              | Toggle sidebar    |
 | ⌥/Alt + 1–9                 | Go to nth chat    |
@@ -89,6 +91,7 @@
         timings: { rapidClickDelayMS: 100 },
         hotkeys: {
             newChat:      { key: 'o', shift: true,  cmdOrCtrl: true },
+            renameChat:   { key: 'u', shift: true,  cmdOrCtrl: true }, // ADDED: 'U' for Update/Rename
             sidebarToggle:{ key: 'b', shift: false, cmdOrCtrl: true },
             openFile:     { key: 'o', shift: false, cmdOrCtrl: true },
             // Help accepts '?' OR '/' with Shift OR code 'Slash'
@@ -102,6 +105,7 @@
             conversationTitle: '.conversation-title',
             actionsMenuButton: '[data-test-id="actions-menu-button"]',
             deleteButton: '[data-test-id="delete-button"]',
+            renameButton: '[data-test-id="rename-button"], button[aria-label*="Rename"]', // ADDED selector
             confirmButton: '[data-test-id="confirm-button"]',
             textInputField: '.text-input-field',
             enterPrompt: '[aria-label="Enter a prompt here"]',
@@ -495,10 +499,29 @@
             // This block now correctly requires BOTH Cmd/Ctrl and Shift to be pressed.
             if (isCmdOrCtrl && event.shiftKey) {
                 switch (key) {
-                        // New Chat: Cmd/Ctrl + Shift + O
                     case CFG.hotkeys.newChat.key: {
                         openNewChat();
                         event.preventDefault();
+                        break;
+                    }
+                    // ADDED: Rename Chat (U)
+                    case CFG.hotkeys.renameChat.key: {
+                        event.preventDefault();
+                        const actions = document.querySelector('.conversation.selected')
+                        ?.parentElement?.querySelector(CFG.selectors.actionsMenuButton);
+                        if (actions) {
+                            simulateClick(actions);
+                            setTimeout(() => {
+                                const renameBtn = document.body.querySelector(CFG.selectors.renameButton);
+                                if (renameBtn) {
+                                    simulateClick(renameBtn);
+                                } else {
+                                    notify('Rename button not found');
+                                }
+                            }, rapidClickDelayMS);
+                        } else {
+                            notify('No chat selected');
+                        }
                         break;
                     }
                     case 'c': {
@@ -680,9 +703,10 @@
           popup.appendChild(style); popup.appendChild(close); popup.appendChild(title); popup.appendChild(intro);
 
           section('Chat Management', [
-              { key: '⌘/Ctrl + Shift + O', action: 'Open new chat' },        // UPDATED
+              { key: '⌘/Ctrl + Shift + O', action: 'Open new chat' },
+              { key: '⌘/Ctrl + Shift + U', action: 'Rename chat' },
               { key: '⌘/Ctrl + Shift + Backspace', action: 'Delete chat' },
-              { key: '⌘/Ctrl + B', action: 'Hide/Show sidebar' },            // stays
+              { key: '⌘/Ctrl + B', action: 'Hide/Show sidebar' },
               { key: '⌥/Alt + 1–9', action: 'Go to nth chat' },
               { key: '⌘/Ctrl + Shift + =', action: 'Next chat' },
               { key: '⌘/Ctrl + Shift + –', action: 'Previous chat' },
