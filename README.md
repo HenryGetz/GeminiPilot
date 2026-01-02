@@ -28,6 +28,7 @@ Empower your automation workflows!  Directly open Gemini with pre-populated prom
 |:--------------------------:|:--------------:|
 | ⌘/Ctrl + Shift + O         | Open new chat  |
 | ⌘/Ctrl + Shift + Backspace | Delete chat    |
+| ⌘/Ctrl + Shift + U         | Rename chat    |
 | ⌘/Ctrl + Shift + F         | Toggle sidebar |
 | ⌥/Alt + 0-9                | Go to nth chat |
 | ⌘/Ctrl + Shift + =         | Next chat      |
